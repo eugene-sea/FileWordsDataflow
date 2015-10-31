@@ -1,14 +1,17 @@
 ﻿namespace FileWordsDataflow.DataModel
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class File
     {
         [Key]
         public int FileId { get; set; }
 
-        public string Name { get; set; }
-
+        [Required]
         public string Path { get; set; }
+
+        [Required]
+        public string Name { get; set; }
     }
 }
