@@ -1,9 +1,8 @@
-﻿using System.Web;
-using System.Web.Mvc;
-
-namespace FileWordsDataflow
+﻿namespace FileWordsDataflow
 {
-    public class FilterConfig
+    using System.Web.Mvc;
+
+    internal static class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
