@@ -15,7 +15,7 @@
         {
             var block = FilesEnumerator.GetFilesEnumeratorBlock("TestFolder", "*.txt");
             var files = Enumerable.Repeat(1, 3).Select(_ => block.Receive(TimeSpan.FromMilliseconds(100))).ToList();
-            block.Completion.Wait();
+            block.EnsureCompleted();
             Assert.IsTrue(
                 files.OrderBy(f => f).SequenceEqual(new[]
                 {
@@ -31,7 +31,7 @@
             try
             {
                 var block = FilesEnumerator.GetFilesEnumeratorBlock("UnexistingFolder", "*.txt");
-                block.Completion.Wait();
+                block.EnsureCompleted();
                 Assert.Fail();
             }
             catch (AggregateException ex)

@@ -14,7 +14,7 @@
             block.Post(@"C:\TestFolder\TestFile.txt");
             var file = block.Receive();
             block.Complete();
-            block.Completion.Wait();
+            block.EnsureCompleted();
             Assert.AreEqual("TestFile.txt", file.Name);
             Assert.AreEqual(@"C:\TestFolder", file.Path);
         }
@@ -26,7 +26,7 @@
             block.Post(@"TestFolder\TestFile.txt");
             var file = block.Receive();
             block.Complete();
-            block.Completion.Wait();
+            block.EnsureCompleted();
             Assert.AreEqual("TestFile.txt", file.Name);
             Assert.IsTrue(System.IO.Path.IsPathRooted(file.Path));
             Assert.IsTrue(System.IO.Path.IsPathRooted(file.FullPath));
