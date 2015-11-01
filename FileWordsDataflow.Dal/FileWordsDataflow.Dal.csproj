@@ -61,6 +61,7 @@
     <Compile Include="FileWordsDataflowDbContext.cs" />
     <Compile Include="FileWordsDataflowDbContextInitializer.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\201510311140571_InitialCreate.cs" />
     <Compile Include="Migrations\201510311140571_InitialCreate.Designer.cs">
       <DependentUpon>201510311140571_InitialCreate.cs</DependentUpon>

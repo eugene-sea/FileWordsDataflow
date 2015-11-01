@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="DataflowBlocks\FileCreator.cs" />
     <Compile Include="DataflowBlocks\FileLinesEnumerator.cs" />
+    <Compile Include="DataflowBlocks\FileSaver.cs" />
     <Compile Include="DataflowBlocks\FilesEnumerator.cs" />
     <Compile Include="DataflowBlocks\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileWordsDataflow.Dal\FileWordsDataflow.Dal.csproj">
+      <Project>{301A2C5C-3797-4E98-BF75-0AFE1A8C8BBD}</Project>
+      <Name>FileWordsDataflow.Dal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileWordsDataflow.DataModel\FileWordsDataflow.DataModel.csproj">
       <Project>{ABEB6C6B-6D44-4E10-87A3-B93322561648}</Project>
       <Name>FileWordsDataflow.DataModel</Name>
