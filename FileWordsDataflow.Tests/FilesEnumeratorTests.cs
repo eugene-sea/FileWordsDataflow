@@ -19,9 +19,9 @@
             Assert.IsTrue(
                 files.OrderBy(f => f).SequenceEqual(new[]
                 {
-                    "TestFolder\\Subfolder\\TextFile2.txt", 
-                    "TestFolder\\Subfolder\\TextFile3.txt",
-                    "TestFolder\\TextFile1.txt"
+                    @"TestFolder\Subfolder\TextFile2.txt", 
+                    @"TestFolder\Subfolder\TextFile3.txt",
+                    @"TestFolder\TextFile1.txt"
                 }));
         }
 

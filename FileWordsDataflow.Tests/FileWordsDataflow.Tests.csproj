@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileCreatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FilesEnumeratorTests.cs" />
   </ItemGroup>
@@ -67,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileWordsDataflow.DataModel\FileWordsDataflow.DataModel.csproj">
+      <Project>{abeb6c6b-6d44-4e10-87a3-b93322561648}</Project>
+      <Name>FileWordsDataflow.DataModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileWordsDataflow.Services\FileWordsDataflow.Services.csproj">
       <Project>{e70aa96a-fde0-4006-a28b-35544b856aeb}</Project>
       <Name>FileWordsDataflow.Services</Name>

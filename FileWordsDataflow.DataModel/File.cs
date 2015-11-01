@@ -13,5 +13,8 @@
 
         [Required]
         public string Name { get; set; }
+
+        [NotMapped]
+        public string FullPath { get; set; }
     }
 }
