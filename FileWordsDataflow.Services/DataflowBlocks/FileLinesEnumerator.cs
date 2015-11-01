@@ -34,20 +34,9 @@
                 },
                 new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded });
 
-            actionBlock.Completion.ContinueWith(
-                t =>
-                {
-                    if (!t.IsFaulted)
-                    {
-                        resultsBlock.Complete();
-                    }
-                    else
-                    {
-                        ((IDataflowBlock)resultsBlock).Fault(t.Exception);
-                    }
-                });
+            actionBlock.Completion.ContinueWith(t => Utils.PropagateCompleted(t, resultsBlock));
             return DataflowBlock.Encapsulate(actionBlock, resultsBlock);
-        } 
+        }
 
         public struct FileLine
         {

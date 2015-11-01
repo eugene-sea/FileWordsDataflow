@@ -55,6 +55,7 @@
     <Compile Include="DataflowBlocks\FileCreator.cs" />
     <Compile Include="DataflowBlocks\FileLinesEnumerator.cs" />
     <Compile Include="DataflowBlocks\FilesEnumerator.cs" />
+    <Compile Include="DataflowBlocks\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

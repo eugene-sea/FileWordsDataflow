@@ -1,33 +1,32 @@
 ﻿namespace FileWordsDataflow.Services.DataflowBlocks
 {
-    using System;
     using System.IO;
-    using System.Threading.Tasks;
     using System.Threading.Tasks.Dataflow;
 
     internal static class FilesEnumerator
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is rethrown implicitly")]
-        public static ISourceBlock<string> GetFilesEnumeratorBlock(string path, string searchPattern)
+        public static IPropagatorBlock<EnumerateFolderTask, string> GetFilesEnumeratorBlock()
         {
-            var res = new BufferBlock<string>();
-            Task.Run(() =>
-            {
-                try
+            var resultsBlock = new BufferBlock<string>();
+            var actionBlock = new ActionBlock<EnumerateFolderTask>(
+                t =>
                 {
-                    foreach (var file in Directory.EnumerateFiles(path, searchPattern, SearchOption.AllDirectories))
+                    foreach (var file in Directory.EnumerateFiles(t.Folder, t.SearchPattern, SearchOption.AllDirectories))
                     {
-                        res.Post(file);
+                        resultsBlock.Post(file);
                     }
+                },
+                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded });
 
-                    res.Complete();
-                }
-                catch (Exception ex)
-                {
-                    ((IDataflowBlock)res).Fault(ex);
-                }
-            });
-            return res;
+            actionBlock.Completion.ContinueWith(t => Utils.PropagateCompleted(t, resultsBlock));
+            return DataflowBlock.Encapsulate(actionBlock, resultsBlock);
+        }
+
+        public class EnumerateFolderTask
+        {
+            public string Folder { get; set; }
+
+            public string SearchPattern { get; set; }
         }
     }
 }
