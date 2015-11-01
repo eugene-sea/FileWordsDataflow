@@ -1,7 +1,7 @@
 ﻿namespace FileWordsDataflow.Tests
 {
     using System;
-    using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks.Dataflow;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,10 +17,27 @@
             var files = Enumerable.Repeat(1, 3).Select(_ => block.Receive(TimeSpan.FromMilliseconds(100))).ToList();
             block.Completion.Wait();
             Assert.IsTrue(
-                files
-                    .OrderBy(f => f)
-                    .SequenceEqual(Enumerable.Range(1, 3)
-                    .Select(i => string.Format(CultureInfo.InvariantCulture, "TextFile{0}.txt", i))));
+                files.OrderBy(f => f).SequenceEqual(new[]
+                {
+                    "TestFolder\\Subfolder\\TextFile2.txt", 
+                    "TestFolder\\Subfolder\\TextFile3.txt",
+                    "TestFolder\\TextFile1.txt"
+                }));
+        }
+
+        [TestMethod]
+        public void ShouldFailIfFolderDoesNotExist()
+        {
+            try
+            {
+                var block = FilesEnumerator.GetFilesEnumeratorBlock("UnexistingFolder", "*.txt");
+                block.Completion.Wait();
+                Assert.Fail();
+            }
+            catch (AggregateException ex)
+            {
+                Assert.IsInstanceOfType(ex.GetBaseException(), typeof(DirectoryNotFoundException));
+            }
         }
     }
 }
