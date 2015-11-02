@@ -28,8 +28,8 @@
             block.Post(new File { Name = "TestFile1.txt" });
             block.Post(new File { Name = "TestFile2.txt" });
             block.Complete();
-            Assert.AreEqual(1, block.Receive().FileId);
-            Assert.AreEqual(2, block.Receive().FileId);
+            Assert.AreEqual(1, block.ReceiveWithTimeout().FileId);
+            Assert.AreEqual(2, block.ReceiveWithTimeout().FileId);
             block.EnsureCompleted();
         }
 

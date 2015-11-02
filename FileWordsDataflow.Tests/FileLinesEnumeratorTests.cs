@@ -15,7 +15,7 @@
             var block = FileLinesEnumerator.GetFileLinesEnumeratorBlock();
             var file = new File { FullPath = @"TestFolder\TextFile1.txt" };
             block.Post(file);
-            var line = block.Receive();
+            var line = block.ReceiveWithTimeout();
             block.Complete();
             block.EnsureCompleted();
             Assert.AreSame(file, line.File);
@@ -46,8 +46,8 @@
             var block = FileLinesEnumerator.GetFileLinesEnumeratorBlock();
             var file = new File { FullPath = @"TestFolder\Subfolder\TextFile2.txt" };
             block.Post(file);
-            block.Receive();
-            var line = block.Receive();
+            block.ReceiveWithTimeout();
+            var line = block.ReceiveWithTimeout();
             block.Complete();
             block.EnsureCompleted();
             Assert.AreSame(file, line.File);

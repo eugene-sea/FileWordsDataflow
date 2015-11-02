@@ -48,7 +48,7 @@
         }
 
         [TestMethod]
-        public void ShouldReturnWordsSeparatedByNonWhiteSpaceCharachters()
+        public void ShouldReturnWordsSeparatedByNonwhiteSpaceCharacters()
         {
             var block = LineSplitter.GetLineSplitterBlock();
             block.Post(new FileLinesEnumerator.FileLine(new File(), 1, "TEST1NAME"));

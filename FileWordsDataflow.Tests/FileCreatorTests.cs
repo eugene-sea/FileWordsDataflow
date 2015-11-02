@@ -12,7 +12,7 @@
         {
             var block = FileCreator.GetFileCreatorBlock();
             block.Post(@"C:\TestFolder\TestFile.txt");
-            var file = block.Receive();
+            var file = block.ReceiveWithTimeout();
             block.Complete();
             block.EnsureCompleted();
             Assert.AreEqual("TestFile.txt", file.Name);
@@ -24,7 +24,7 @@
         {
             var block = FileCreator.GetFileCreatorBlock();
             block.Post(@"TestFolder\TestFile.txt");
-            var file = block.Receive();
+            var file = block.ReceiveWithTimeout();
             block.Complete();
             block.EnsureCompleted();
             Assert.AreEqual("TestFile.txt", file.Name);
