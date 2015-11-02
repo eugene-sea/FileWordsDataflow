@@ -18,7 +18,7 @@
                     return files;
                 });
             batchBlock.LinkTo(transformBlock);
-            batchBlock.Completion.ContinueWith(t => Utils.PropagateCompleted(t, transformBlock));
+            batchBlock.PropagateCompleted(transformBlock);
             return DataflowBlock.Encapsulate(batchBlock, transformBlock);
         }
     }

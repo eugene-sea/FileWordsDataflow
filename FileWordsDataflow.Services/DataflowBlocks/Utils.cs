@@ -1,20 +1,22 @@
 namespace FileWordsDataflow.Services.DataflowBlocks
 {
-    using System.Threading.Tasks;
     using System.Threading.Tasks.Dataflow;
 
     internal static class Utils
     {
-        public static void PropagateCompleted(Task completionTask, IDataflowBlock targetBlock)
+        public static void PropagateCompleted(this IDataflowBlock sourceBlock, IDataflowBlock targetBlock)
         {
-            if (!completionTask.IsFaulted)
+            sourceBlock.Completion.ContinueWith(t =>
             {
-                targetBlock.Complete();
-            }
-            else
-            {
-                targetBlock.Fault(completionTask.Exception);
-            }
+                if (!t.IsFaulted)
+                {
+                    targetBlock.Complete();
+                }
+                else
+                {
+                    targetBlock.Fault(t.Exception);
+                }
+            });
         }
     }
 }

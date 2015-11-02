@@ -34,7 +34,7 @@
                 },
                 new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded });
 
-            actionBlock.Completion.ContinueWith(t => Utils.PropagateCompleted(t, resultsBlock));
+            actionBlock.PropagateCompleted(resultsBlock);
             return DataflowBlock.Encapsulate(actionBlock, resultsBlock);
         }
 

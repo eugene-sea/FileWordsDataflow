@@ -11,14 +11,15 @@
             var actionBlock = new ActionBlock<EnumerateFolderTask>(
                 t =>
                 {
-                    foreach (var file in Directory.EnumerateFiles(t.Folder, t.SearchPattern, SearchOption.AllDirectories))
+                    foreach (
+                        var file in Directory.EnumerateFiles(t.Folder, t.SearchPattern, SearchOption.AllDirectories))
                     {
                         resultsBlock.Post(file);
                     }
                 },
                 new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded });
 
-            actionBlock.Completion.ContinueWith(t => Utils.PropagateCompleted(t, resultsBlock));
+            actionBlock.PropagateCompleted(resultsBlock);
             return DataflowBlock.Encapsulate(actionBlock, resultsBlock);
         }
 
