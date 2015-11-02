@@ -62,6 +62,7 @@
     <Compile Include="TestUtils.cs" />
     <Compile Include="FileSaverTests.cs" />
     <Compile Include="LineSplitterTests.cs" />
+    <Compile Include="FileWordCreatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
