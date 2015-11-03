@@ -25,5 +25,11 @@ namespace FileWordsDataflow.Services.DataflowBlocks
                 }
             });
         }
+
+        public static void LinkToAndPropagateCompleted<T>(this ISourceBlock<T> sourceBlock, ITargetBlock<T> targetBlock)
+        {
+            sourceBlock.LinkTo(targetBlock);
+            sourceBlock.PropagateCompleted(targetBlock);
+        }
     }
 }

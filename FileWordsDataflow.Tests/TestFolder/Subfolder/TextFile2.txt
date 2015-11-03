@@ -1,3 +1,4 @@
 ﻿Some line
 
 Mother was washing window frame
+Splash screens do not have window frame

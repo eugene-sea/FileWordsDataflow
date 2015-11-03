@@ -15,7 +15,7 @@ namespace FileWordsDataflow.Tests
 
         public static T ReceiveWithTimeout<T>(this ISourceBlock<T> block)
         {
-            return Debugger.IsAttached ? block.Receive() : block.Receive(TimeSpan.FromMilliseconds(100));
+            return Debugger.IsAttached ? block.Receive() : block.Receive(TimeSpan.FromMilliseconds(500));
         }
 
         public static void EnsureCompleted(this IDataflowBlock block)

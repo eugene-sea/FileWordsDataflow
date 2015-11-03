@@ -48,6 +48,7 @@
             block.Post(file);
             block.ReceiveWithTimeout();
             var line = block.ReceiveWithTimeout();
+            block.ReceiveWithTimeout();
             block.Complete();
             block.EnsureCompleted();
             Assert.AreSame(file, line.File);

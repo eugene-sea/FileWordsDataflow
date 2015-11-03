@@ -59,6 +59,9 @@
     <Compile Include="DataflowBlocks\FileWordCreator.cs" />
     <Compile Include="DataflowBlocks\LineSplitter.cs" />
     <Compile Include="DataflowBlocks\Utils.cs" />
+    <Compile Include="FileWordsService.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IFileWordsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
