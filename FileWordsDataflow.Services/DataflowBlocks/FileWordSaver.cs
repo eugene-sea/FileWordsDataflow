@@ -13,7 +13,7 @@
         {
             var batchBlock = new BatchBlock<FileWord>(1000);
             var transformBlock = new TransformManyBlock<FileWord[], FileWord>(
-                fileWords =>
+                async fileWords =>
                 {
                     var repo = repositoryFactory();
 
@@ -41,7 +41,7 @@
                         }
                     }
 
-                    repo.SaveEntities(fileWords, filesToSave, wordsToSave);
+                    await repo.SaveEntitiesAsync(fileWords, filesToSave, wordsToSave);
                     return fileWords;
                 },
                 new ExecutionDataflowBlockOptions

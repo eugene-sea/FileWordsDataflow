@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Threading.Tasks.Dataflow;
     using Dal;
     using DataModel;
@@ -19,7 +20,7 @@
             var mock = new Mock<IRepository>(MockBehavior.Strict);
             mock.Setup(
                 i =>
-                    i.SaveEntities(
+                    i.SaveEntitiesAsync(
                         It.Is<IEnumerable<FileWord>>(
                             a =>
                                 a.Count() == 2 &&
@@ -32,7 +33,7 @@
                                         (w.WordId < 1 && w.Word != null && w.Word.WordId == 0) ||
                                         (w.WordId > 0 && w.Word == null))),
                         It.Is<IEnumerable<File>>(a => a.Single().FileId < 1),
-                        It.Is<IEnumerable<Word>>(a => a.Single().WordId < 1)));
+                        It.Is<IEnumerable<Word>>(a => a.Single().WordId < 1))).Returns(Task.FromResult(true));
 
             var block = FileWordSaver.GetFileWordSaverBlock(() => mock.Object, doNotSaveParentEntities: false);
             block.Post(new FileWord { File = new File { FileId = 1 }, Word = new Word { Term = "TEST" } });
@@ -49,7 +50,7 @@
             var mock = new Mock<IRepository>();
             mock.Setup(
                 i =>
-                    i.SaveEntities(
+                    i.SaveEntitiesAsync(
                         It.IsAny<IEnumerable<FileWord>>(),
                         It.IsAny<IEnumerable<File>>(),
                         It.IsAny<IEnumerable<Word>>())).Throws<InvalidOperationException>();
@@ -74,10 +75,10 @@
             var mock = new Mock<IRepository>(MockBehavior.Strict);
             mock.Setup(
                 i =>
-                    i.SaveEntities(
+                    i.SaveEntitiesAsync(
                         It.Is<IEnumerable<FileWord>>(a => a.Count() == 2),
                         It.Is<IEnumerable<File>>(a => !a.Any()),
-                        It.Is<IEnumerable<Word>>(a => !a.Any())));
+                        It.Is<IEnumerable<Word>>(a => !a.Any()))).Returns(Task.FromResult(true));
 
             var block = FileWordSaver.GetFileWordSaverBlock(() => mock.Object, doNotSaveParentEntities: true);
             block.Post(new FileWord { File = new File { FileId = 1 }, Word = new Word { Term = "TEST" } });
