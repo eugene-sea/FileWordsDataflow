@@ -8,32 +8,8 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "It is OK for test class")]
     public class RepositoryTests
     {
-        private TransactionScope scope;
-
-        [TestInitialize]
-        public virtual void TestInitialize()
-        {
-            scope = new TransactionScope(
-                TransactionScopeOption.RequiresNew,
-                new TransactionOptions
-                {
-                    IsolationLevel = IsolationLevel.ReadCommitted
-                });
-        }
-
-        [TestCleanup]
-        public virtual void TestCleanup()
-        {
-            if (scope != null)
-            {
-                scope.Dispose();
-                scope = null;
-            }
-        }
-
         [TestMethod]
         public void ShouldFillIdsOfSavedEntities()
         {
@@ -41,7 +17,11 @@
             var file = new File { Path = "TestPath", Name = "TestFile1.txt" };
             var word = new Word { Term = Guid.NewGuid().ToString() };
             var fileWord = new FileWord { File = file, Word = word };
-            repo.SaveEntitiesAsync(new[] { fileWord }, new[] { file }, new[] { word }).Wait();
+            using (CreateTransaction())
+            {
+                repo.SaveEntitiesAsync(new[] { fileWord }, new[] { file }, new[] { word }).Wait();
+            }
+
             Assert.IsTrue(file.FileId > 0);
             Assert.IsTrue(word.WordId > 0);
             Assert.IsTrue(fileWord.FileWordId > 0 && fileWord.FileId > 0 && fileWord.WordId > 0);
@@ -60,8 +40,6 @@
                 Assert.IsTrue(context.Files.Any() && context.Words.Any() && context.FileWords.Any());
             }
 
-            scope.Dispose();
-            scope = null;
             repo.TruncateDataAsync().Wait();
             using (var context = new FileWordsDataflowDbContext())
             {
@@ -70,11 +48,9 @@
         }
 
         [TestMethod]
-        public void ShouldReturnCorrectFileWordStatsAndInOrder()
+        public void ShouldReturnCorrectFileWordStatsInOrder()
         {
             var repo = new Repository();
-            scope.Dispose();
-            scope = null;
             repo.TruncateDataAsync().Wait();
 
             var file = new File { Path = "TestPath", Name = "TestFile1.txt" };
@@ -93,6 +69,16 @@
             Assert.AreEqual("B", stats[1].Word);
             Assert.AreEqual(2, stats[1].Occurrences);
             Assert.AreEqual(1, stats[1].FirstRow);
+        }
+
+        private static TransactionScope CreateTransaction()
+        {
+            return new TransactionScope(
+                TransactionScopeOption.RequiresNew,
+                new TransactionOptions
+                {
+                    IsolationLevel = IsolationLevel.ReadCommitted
+                });
         }
     }
 }

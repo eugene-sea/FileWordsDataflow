@@ -49,8 +49,7 @@
                     MaxDegreeOfParallelism = !doNotSaveParentEntities ? 1 : Utils.GlobalMaxDegreeOfParallelism
                 });
 
-            batchBlock.LinkTo(transformBlock);
-            batchBlock.PropagateCompleted(transformBlock);
+            batchBlock.LinkToAndPropagateCompleted(transformBlock);
             return DataflowBlock.Encapsulate(batchBlock, transformBlock);
         }
     }

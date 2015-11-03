@@ -10,6 +10,7 @@
         
         Task TruncateDataAsync();
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "It is OK")]
         Task<IList<FileWordStats>> GetFileWordStatsAsync(int skip, int take);
     }
 }
