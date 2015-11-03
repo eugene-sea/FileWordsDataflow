@@ -32,7 +32,7 @@
                         }
                     }
                 },
-                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded });
+                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = Utils.GlobalMaxDegreeOfParallelism });
 
             actionBlock.PropagateCompleted(resultsBlock);
             return DataflowBlock.Encapsulate(actionBlock, resultsBlock);

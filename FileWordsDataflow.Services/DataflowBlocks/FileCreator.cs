@@ -19,7 +19,7 @@
                             FullPath = filePath
                         };
                     },
-                    new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded });
+                    new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = Utils.GlobalMaxDegreeOfParallelism });
         }
     }
 }

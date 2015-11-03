@@ -46,7 +46,7 @@
                 },
                 new ExecutionDataflowBlockOptions
                 { // If we are saving files/words also we cannot do this concurrently or duplicates of files/words may be inserted
-                    MaxDegreeOfParallelism = !doNotSaveParentEntities ? 1 : DataflowBlockOptions.Unbounded
+                    MaxDegreeOfParallelism = !doNotSaveParentEntities ? 1 : Utils.GlobalMaxDegreeOfParallelism
                 });
 
             batchBlock.LinkTo(transformBlock);

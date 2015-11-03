@@ -4,6 +4,13 @@ namespace FileWordsDataflow.Services.DataflowBlocks
 
     internal static class Utils
     {
+        static Utils()
+        {
+            GlobalMaxDegreeOfParallelism = DataflowBlockOptions.Unbounded;
+        }
+
+        public static int GlobalMaxDegreeOfParallelism { get; set; }
+
         public static void PropagateCompleted(this IDataflowBlock sourceBlock, IDataflowBlock targetBlock)
         {
             sourceBlock.Completion.ContinueWith(t =>

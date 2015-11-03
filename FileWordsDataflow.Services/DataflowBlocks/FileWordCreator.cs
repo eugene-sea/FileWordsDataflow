@@ -16,7 +16,7 @@
                    var word = wordCache.GetOrAdd(w.Word, term => new Word { Term = term });
                     resultsBlock.Post(new FileWord { File = w.File, Word = word, Row = w.Row, Col = w.Col });
                 },
-                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded });
+                new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = Utils.GlobalMaxDegreeOfParallelism });
 
             actionBlock.PropagateCompleted(resultsBlock);
             return DataflowBlock.Encapsulate(actionBlock, resultsBlock);
