@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="DataflowBlocks\FileCreator.cs" />
     <Compile Include="DataflowBlocks\FileLinesEnumerator.cs" />
-    <Compile Include="DataflowBlocks\FileSaver.cs" />
+    <Compile Include="DataflowBlocks\FileWordSaver.cs" />
     <Compile Include="DataflowBlocks\FilesEnumerator.cs" />
     <Compile Include="DataflowBlocks\FileWordCreator.cs" />
     <Compile Include="DataflowBlocks\LineSplitter.cs" />

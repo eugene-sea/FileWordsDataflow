@@ -60,7 +60,7 @@
     <Compile Include="FilesEnumeratorTests.cs" />
     <Compile Include="FileLinesEnumeratorTests.cs" />
     <Compile Include="TestUtils.cs" />
-    <Compile Include="FileSaverTests.cs" />
+    <Compile Include="FileWordSaverTests.cs" />
     <Compile Include="LineSplitterTests.cs" />
     <Compile Include="FileWordCreatorTests.cs" />
   </ItemGroup>

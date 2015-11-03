@@ -5,6 +5,6 @@
 
     public interface IRepository
     {
-        void SaveFiles(IEnumerable<File> files);
+        void SaveEntities(IEnumerable<FileWord> fileWords, IEnumerable<File> files, IEnumerable<Word> words);
     }
 }

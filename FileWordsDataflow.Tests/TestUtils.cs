@@ -1,6 +1,7 @@
 namespace FileWordsDataflow.Tests
 {
     using System;
+    using System.Diagnostics;
     using System.Threading.Tasks.Dataflow;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,11 +9,17 @@ namespace FileWordsDataflow.Tests
     {
         public static T ReceiveWithTimeout<T>(this ISourceBlock<T> block)
         {
-            return block.Receive(TimeSpan.FromMilliseconds(100));
+            return Debugger.IsAttached ? block.Receive() : block.Receive(TimeSpan.FromMilliseconds(100));
         }
 
         public static void EnsureCompleted(this IDataflowBlock block)
         {
+            if (Debugger.IsAttached)
+            {
+                block.Completion.Wait();
+                return;
+            }
+
             Assert.IsTrue(block.Completion.Wait(TimeSpan.FromMilliseconds(100)));
         }
     }
