@@ -78,12 +78,17 @@
     <Compile Include="FileWordsService.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IFileWordsService.cs" />
+    <Compile Include="ModuleInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileWordsDataflow.Common\FileWordsDataflow.Common.csproj">
+      <Project>{7C3FD1BD-FB47-47FA-AB85-B92CD79130C6}</Project>
+      <Name>FileWordsDataflow.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileWordsDataflow.Dal\FileWordsDataflow.Dal.csproj">
       <Project>{301A2C5C-3797-4E98-BF75-0AFE1A8C8BBD}</Project>
       <Name>FileWordsDataflow.Dal</Name>
