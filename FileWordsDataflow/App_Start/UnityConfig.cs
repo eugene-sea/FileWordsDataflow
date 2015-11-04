@@ -1,6 +1,7 @@
 namespace FileWordsDataflow
 {
     using System;
+    using Common;
     using Microsoft.Practices.Unity;
 
     internal static class UnityConfig
@@ -19,6 +20,8 @@ namespace FileWordsDataflow
 
         public static void RegisterTypes(IUnityContainer container)
         {
+            // TODO: ApplicationParameters should be created elsewhere
+            ModuleLoader.LoadContainer(new ApplicationParameters(), container, ".\\bin", "FileWordsDataflow.*.dll");
         }
     }
 }

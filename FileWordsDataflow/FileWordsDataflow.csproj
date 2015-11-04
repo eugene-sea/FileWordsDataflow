@@ -200,6 +200,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileWordsDataflow.Common\FileWordsDataflow.Common.csproj">
+      <Project>{7C3FD1BD-FB47-47FA-AB85-B92CD79130C6}</Project>
+      <Name>FileWordsDataflow.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileWordsDataflow.Dal\FileWordsDataflow.Dal.csproj">
       <Project>{301a2c5c-3797-4e98-bf75-0afe1a8c8bbd}</Project>
       <Name>FileWordsDataflow.Dal</Name>

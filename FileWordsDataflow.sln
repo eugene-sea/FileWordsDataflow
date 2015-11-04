@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWordsDataflow.Dal", "Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWordsDataflow.Services", "FileWordsDataflow.Services\FileWordsDataflow.Services.csproj", "{E70AA96A-FDE0-4006-A28B-35544B856AEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWordsDataflow.Common", "FileWordsDataflow.Common\FileWordsDataflow.Common.csproj", "{7C3FD1BD-FB47-47FA-AB85-B92CD79130C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{E70AA96A-FDE0-4006-A28B-35544B856AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E70AA96A-FDE0-4006-A28B-35544B856AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E70AA96A-FDE0-4006-A28B-35544B856AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C3FD1BD-FB47-47FA-AB85-B92CD79130C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C3FD1BD-FB47-47FA-AB85-B92CD79130C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C3FD1BD-FB47-47FA-AB85-B92CD79130C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C3FD1BD-FB47-47FA-AB85-B92CD79130C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
