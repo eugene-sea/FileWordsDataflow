@@ -22,18 +22,10 @@
             return View();
         }
 
-        public ActionResult About()
+        public async Task<ActionResult> RefreshData(string folderPath, string searchPattern)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            await fileWordsService.ParseFilesAsync(folderPath, searchPattern);
+            return RedirectToAction("Index");
         }
     }
 }
