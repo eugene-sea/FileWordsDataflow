@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201510311208408_AddedIndexes.Designer.cs">
       <DependentUpon>201510311208408_AddedIndexes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511040718392_IndexTuning.cs" />
+    <Compile Include="Migrations\201511040718392_IndexTuning.Designer.cs">
+      <DependentUpon>201511040718392_IndexTuning.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510311208408_AddedIndexes.resx">
       <DependentUpon>201510311208408_AddedIndexes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511040718392_IndexTuning.resx">
+      <DependentUpon>201511040718392_IndexTuning.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
