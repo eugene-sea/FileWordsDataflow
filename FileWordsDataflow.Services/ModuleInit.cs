@@ -1,8 +1,10 @@
 ﻿namespace FileWordsDataflow.Services
 {
     using System;
+    using System.ComponentModel.Composition;
     using Common;
 
+    [Export(typeof(IModule))]
     public class ModuleInit : IModule
     {
         public void Initialize(ApplicationParameters parameters, IModuleRegistrar registrar)

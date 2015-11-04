@@ -212,6 +212,10 @@
       <Project>{abeb6c6b-6d44-4e10-87a3-b93322561648}</Project>
       <Name>FileWordsDataflow.DataModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FileWordsDataflow.Services\FileWordsDataflow.Services.csproj">
+      <Project>{E70AA96A-FDE0-4006-A28B-35544B856AEB}</Project>
+      <Name>FileWordsDataflow.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
