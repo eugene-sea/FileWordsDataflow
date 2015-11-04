@@ -29,11 +29,11 @@
             batchBlockWithoutParents.LinkToAndPropagateCompleted(saveWithoutParentsBlock);
             saveWithoutParentsBlock.LinkTo(outputBuffer);
 
-            var batchBlockWithParents = new BatchBlock<FileWord>(1000);
+            var batchBlockWithParents = new BatchBlock<FileWord>(300);
 
             // MaxMessages value means inputBuffer will unlink automatically from batchBlockWithParents after 1000 messages.
             // This is required to prohibit "stealing" of workload from saveWithoutParentsBlock
-            inputBuffer.LinkTo(batchBlockWithParents, new DataflowLinkOptions { MaxMessages = 1000 });
+            inputBuffer.LinkTo(batchBlockWithParents, new DataflowLinkOptions { MaxMessages = 300 });
             inputBuffer.PropagateCompleted(batchBlockWithParents);
 
             var saveWithParentsBlock = new TransformManyBlock<FileWord[], FileWord>(
@@ -53,8 +53,8 @@
                         }
                     }
 
-                    // Link again for another 1000 messages
-                    inputBuffer.LinkTo(batchBlockWithParents, new DataflowLinkOptions { MaxMessages = 1000 });
+                    // Link again for another 300 messages
+                    inputBuffer.LinkTo(batchBlockWithParents, new DataflowLinkOptions { MaxMessages = 300 });
                     return res;
                 },
                 new ExecutionDataflowBlockOptions
