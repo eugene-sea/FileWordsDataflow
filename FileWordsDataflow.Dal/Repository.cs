@@ -38,11 +38,11 @@
             {
                 var results =
                     from fw in context.FileWords.AsNoTracking()
-                    group fw by new { fw.Word.Term, fw.FileId } into groups
+                    group fw by new { fw.WordId, fw.FileId } into groups
                     let firstWord = groups.OrderBy(i => i.Row).ThenBy(i => i.Col).FirstOrDefault()
                     select new FileWordStats
                     {
-                        Word = groups.Key.Term,
+                        Word = firstWord.Word.Term,
                         File = firstWord.File.Name,
                         FirstRow = firstWord.Row,
                         FirstCol = firstWord.Col,
