@@ -1,7 +1,7 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(FileWordsDataflow.UnityWebActivator), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(FileWordsDataflow.UnityWebActivator), "Shutdown")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(FileWordsDataflow.Web.UnityWebActivator), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(FileWordsDataflow.Web.UnityWebActivator), "Shutdown")]
 
-namespace FileWordsDataflow
+namespace FileWordsDataflow.Web
 {
     using System.Linq;
     using System.Web.Mvc;

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWordsDataflow", "FileWordsDataflow\FileWordsDataflow.csproj", "{FDF65049-AF58-4718-8327-66A82219DDED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWordsDataflow.Web", "FileWordsDataflow.Web\FileWordsDataflow.Web.csproj", "{FDF65049-AF58-4718-8327-66A82219DDED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileWordsDataflow.Tests", "FileWordsDataflow.Tests\FileWordsDataflow.Tests.csproj", "{529863DB-4A05-4AEB-A808-EB078BFC589D}"
 EndProject
