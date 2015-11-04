@@ -35,17 +35,11 @@
             var fileWordCreator = FileWordCreator.GetFileWordCreatorBlock();
             lineSplitter.LinkToAndPropagateCompleted(fileWordCreator);
 
-            var fileWordSaverWithoutParents = FileWordSaver.GetFileWordSaverBlock(repositoryFactory, true);
-            fileWordCreator.LinkTo(fileWordSaverWithoutParents, i => i.File.FileId > 0 && i.Word.WordId > 0);
-            fileWordCreator.PropagateCompleted(fileWordSaverWithoutParents);
-
-            var fileWordSaverWithParents = FileWordSaver.GetFileWordSaverBlock(repositoryFactory, false);
-            fileWordCreator.LinkTo(fileWordSaverWithParents);
-            fileWordCreator.PropagateCompleted(fileWordSaverWithParents);
+            var fileWordSaver = FileWordSaver.GetFileWordSaverBlock(repositoryFactory);
+            fileWordCreator.LinkToAndPropagateCompleted(fileWordSaver);
 
             var nullTarget = DataflowBlock.NullTarget<FileWord>();
-            fileWordSaverWithParents.LinkTo(nullTarget);
-            fileWordSaverWithoutParents.LinkTo(nullTarget);
+            fileWordSaver.LinkTo(nullTarget);
 
             filesEnumerator.Post(new FilesEnumerator.EnumerateFolderTask
             {
@@ -53,7 +47,7 @@
                 SearchPattern = searchPattern
             });
             filesEnumerator.Complete();
-            await Task.WhenAll(fileWordSaverWithoutParents.Completion, fileWordSaverWithParents.Completion);
+            await fileWordSaver.Completion;
         }
 
         public Task<IList<FileWordStats>> GetFileWordStatsAsync(int skip, int take)

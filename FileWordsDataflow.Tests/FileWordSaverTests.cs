@@ -15,7 +15,7 @@
     public class FileWordSaverTests
     {
         [TestMethod]
-        public void ShouldSaveFileWordWithFilesAndWordWhichDoNotHaveIdYetViaRepository()
+        public void ShouldSaveFileWordWithFileAndWordWhichDoNotHaveIdYetViaRepository()
         {
             var mock = new Mock<IRepository>(MockBehavior.Strict);
             mock.Setup(
@@ -35,7 +35,7 @@
                         It.Is<IEnumerable<File>>(a => a.Single().FileId < 1),
                         It.Is<IEnumerable<Word>>(a => a.Single().WordId < 1))).Returns(Task.FromResult(true));
 
-            var block = FileWordSaver.GetFileWordSaverBlock(() => mock.Object, doNotSaveParentEntities: false);
+            var block = FileWordSaver.GetFileWordSaverBlock(() => mock.Object);
             block.Post(new FileWord { File = new File { FileId = 1 }, Word = new Word { Term = "TEST" } });
             block.Post(new FileWord { File = new File(), Word = new Word { WordId = 1, Term = "WORD" } });
             block.Complete();
@@ -55,7 +55,7 @@
                         It.IsAny<IEnumerable<File>>(),
                         It.IsAny<IEnumerable<Word>>())).Throws<InvalidOperationException>();
 
-            var block = FileWordSaver.GetFileWordSaverBlock(() => mock.Object, false);
+            var block = FileWordSaver.GetFileWordSaverBlock(() => mock.Object);
             block.Post(new FileWord { File = new File(), Word = new Word() });
             block.Complete();
             try
@@ -70,7 +70,7 @@
         }
 
         [TestMethod]
-        public void ShouldNotSaveParentEntitiesIfArgumentSpecified()
+        public void ShouldNotSaveParentEntitiesIfTheyHaveIds()
         {
             var mock = new Mock<IRepository>(MockBehavior.Strict);
             mock.Setup(
@@ -80,9 +80,9 @@
                         It.Is<IEnumerable<File>>(a => !a.Any()),
                         It.Is<IEnumerable<Word>>(a => !a.Any()))).Returns(Task.FromResult(true));
 
-            var block = FileWordSaver.GetFileWordSaverBlock(() => mock.Object, doNotSaveParentEntities: true);
-            block.Post(new FileWord { File = new File { FileId = 1 }, Word = new Word { Term = "TEST" } });
-            block.Post(new FileWord { File = new File(), Word = new Word { WordId = 1, Term = "WORD" } });
+            var block = FileWordSaver.GetFileWordSaverBlock(() => mock.Object);
+            block.Post(new FileWord { File = new File { FileId = 1 }, Word = new Word { WordId = 1 } });
+            block.Post(new FileWord { File = new File { FileId = 2 }, Word = new Word { WordId = 1 } });
             block.Complete();
             block.ReceiveWithTimeout();
             block.ReceiveWithTimeout();
