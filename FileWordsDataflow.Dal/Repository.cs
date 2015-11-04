@@ -15,6 +15,8 @@
         {
             using (var context = new FileWordsDataflowDbContext())
             {
+                context.Configuration.AutoDetectChangesEnabled = false;
+                context.Configuration.ValidateOnSaveEnabled = false;
                 context.Files.AddRange(files);
                 context.Words.AddRange(words);
                 context.FileWords.AddRange(fileWords);
