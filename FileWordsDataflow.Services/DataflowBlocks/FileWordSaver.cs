@@ -31,7 +31,7 @@
 
             var batchBlockWithParents = new BatchBlock<FileWord>(300);
 
-            // MaxMessages value means inputBuffer will unlink automatically from batchBlockWithParents after 1000 messages.
+            // MaxMessages value means inputBuffer will unlink automatically from batchBlockWithParents after 300 messages.
             // This is required to prohibit "stealing" of workload from saveWithoutParentsBlock
             inputBuffer.LinkTo(batchBlockWithParents, new DataflowLinkOptions { MaxMessages = 300 });
             inputBuffer.PropagateCompleted(batchBlockWithParents);
