@@ -1,6 +1,7 @@
 StyleCop.Cache
 bin/
 obj/
+packages/
 *.csproj.user
 *.suo
 *.DotSettings.user
