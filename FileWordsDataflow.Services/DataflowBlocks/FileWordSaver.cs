@@ -86,11 +86,11 @@
             var filesToSave =
                 doNotSaveParentEntities
                     ? Enumerable.Empty<File>()
-                    : fileWords.GroupBy(w => w.File).Select(g => g.Key).Where(f => f.FileId < 1).ToArray();
+                    : fileWords.Select(w => w.File).Distinct().Where(f => f.FileId < 1).ToArray();
             var wordsToSave =
                 doNotSaveParentEntities
                     ? Enumerable.Empty<Word>()
-                    : fileWords.GroupBy(w => w.Word).Select(g => g.Key).Where(w => w.WordId < 1).ToArray();
+                    : fileWords.Select(w => w.Word).Distinct().Where(w => w.WordId < 1).ToArray();
 
             foreach (var word in fileWords)
             {
